@@ -1,41 +1,47 @@
-function BasicArray(){
+let DataStructure = require("./datastructure.js");
+let ApiConstructor = require("../utility/apiconstructor.js");
+
+function BasicArray(options) {
+  let defaults = {
+    "width": 0,
+    "init": 0,
+  }
+  DataStructure.call(this, options, defaults);
   this.data = [];
+  for (let i = 0; i < this.options.width; i++) {
+    this.add(this.options.init);
+  }
 }
+BasicArray.prototype = Object.create(DataStructure.prototype);
+BasicArray.prototype.constructor = BasicArray;
 
 module.exports = BasicArray;
 
-BasicArray.prototype.remove = function(index) {
-  var removedElement = this.data.splice(index, 1);
+ApiConstructor(BasicArray, "remove", function(that, index) {
+  var removedElement = that.data.splice(index, 1);
   return removedElement;
-};
+});
 
-BasicArray.prototype.add = function(element) {
-  this.data.push(element);
-};
+ApiConstructor(BasicArray, "add", function(that, element) {
+  that.data.push(element);
+});
 
-BasicArray.prototype.get = function(index) {
-  return this.data[index];
-};
+ApiConstructor(BasicArray, "length", function(that) {
+  return that.data.length;
+});
 
-BasicArray.prototype.length = function() {
-  return this.data.length;
-};
+ApiConstructor(BasicArray, "visualize", function(that, container) {
+  let row = that.getDataContainer("array1d", container);
 
-BasicArray.prototype.visualize = function(container) {
-  row = document.createElement('div');
-  row.className = "array1d";
-  container.appendChild(row);
-
-  let temp = document.createElement('div');
-
-  for (let i = 0; i < this.data.length; i++) {
+  // Add all elements
+  for (let i = 0; i < that.data.length; i++) {
     let currentElement = document.createElement('div');
 
     let innerText = document.createElement('p');
     // TODO allow JSON handling
-    innerText.innerText = String(this.data[i]);
+    innerText.innerText = String(that.data[i]);
     currentElement.appendChild(innerText);
 
     row.appendChild(currentElement);
   }
-};
+}, false);

@@ -1,35 +1,56 @@
-function TwoDimensionalArray(){
+let DataStructure = require("./datastructure.js");
+let ApiConstructor = require("../utility/apiconstructor.js");
+
+function TwoDimensionalArray(options) {
+  let defaults = {
+    "width": 0,
+    "height": 0,
+    "init": 0,
+  }
+  DataStructure.call(this, options, defaults);
+
   this.data = [];
+  for (let i = 0; i < this.options.height; i++) {
+    let temp = new BasicArray(options);
+    this.add(temp);
+  }
 }
+TwoDimensionalArray.prototype = Object.create(DataStructure.prototype);
+TwoDimensionalArray.prototype.constructor = TwoDimensionalArray;
 
 module.exports = TwoDimensionalArray;
 
-TwoDimensionalArray.prototype.remove = function(index) {
-  var removedElement = this.data.splice(index, 1);
+ApiConstructor(TwoDimensionalArray, "initialize", function(that, width, height) {
+  that.data = [];
+  for (let i = 0; i < sizeY; i++) {
+    that.add([]);
+  }
+});
+
+ApiConstructor(TwoDimensionalArray, "remove", function(that, index) {
+  var removedElement = that.data.splice(index, 1);
   return removedElement;
-};
+});
 
-TwoDimensionalArray.prototype.add = function(element) {
-  this.data.push(element);
-};
+ApiConstructor(TwoDimensionalArray, "add", function(that, element) {
+  that.data.push(element);
+});
 
-TwoDimensionalArray.prototype.get = function(x, y) {
-  return this.data[y].get(x)
-};
+ApiConstructor(TwoDimensionalArray, "get", function(that, x, y) {
+  return that.data[y].get(x)
+});
 
-TwoDimensionalArray.prototype.size = function() {
-  return this.data.map(function(array) {
+ApiConstructor(TwoDimensionalArray, "size", function(that) {
+  return that.data.map(function(array) {
     return array.length;
   }).reduce(function(a, b) {
     return a + b;
   });
-};
+});
 
-TwoDimensionalArray.prototype.visualize = function(container) {
-  let thisContainer = document.createElement("div");
-  container.appendChild(thisContainer);
-  thisContainer.className = "array2d";
-  for (let i = 0; i < this.data.length; i++) {
-    this.data[i].visualize(thisContainer);
+ApiConstructor(TwoDimensionalArray, "visualize", function(that, container) {
+  let array = that.getDataContainer("array2d", container);
+  for (let i = 0; i < that.data.length; i++) {
+    that.data[i].visualize(array, array);
   }
-}
+}, false);

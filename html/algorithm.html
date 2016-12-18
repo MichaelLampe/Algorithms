@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Algorithm Center!</title>
-    <link rel="stylesheet" type="text/css" href="../css/hashset.css" />
+    <link rel="stylesheet" type="text/css" href="../css/array2d.css" />
   </head>
   <body>
     <h1>Algorithm Central</h1>
@@ -24,10 +24,10 @@
 
     let b = document.getElementById('visualize-button')
 
-    let collection = new HashSet();
-    collection.add(5);
-    collection.add(6);
-    collection.add(5);
+    let collection = new TwoDimensionalArray({
+      width: 5,
+      height: 5
+    });
 
     b.onclick = function() {
       let container = document.getElementById("visualization-box");
@@ -35,6 +35,7 @@
         container.removeChild(container.firstChild);
       }
       collection.visualize(container);
+      collection.stats.printSummary();
     };
   </script>
 </html>
