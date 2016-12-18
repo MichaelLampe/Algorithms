@@ -1,0 +1,24 @@
+.hashset {
+  background: purple;
+  display: table-row;
+}
+
+.hashset >:first-child {
+  background: red;
+}
+
+.hashset > div {
+  background: purple;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px 0 2px 2px;
+  vertical-align: middle;
+  text-align: center;
+  padding: 4px 10px;
+  display: table-cell;
+}
+
+.hashset >:last-child {
+  background: yellow;
+  border-right-width: 2px;
+}

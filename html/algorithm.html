@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Algorithm Center!</title>
-    <link rel="stylesheet" type="text/css" href="../css/linked-list.css" />
+    <link rel="stylesheet" type="text/css" href="../css/hashset.css" />
   </head>
   <body>
     <h1>Algorithm Central</h1>
@@ -20,22 +20,21 @@
     let TwoDimensionalArray = require('../js/datastructures/array2d.js');
     let HashMap = require('../js/datastructures/hashmap.js');
     let LinkedList = require('../js/datastructures/linkedlist.js')
+    let HashSet = require('../js/datastructures/hashset.js')
 
     let b = document.getElementById('visualize-button')
 
-    let linkedList = new LinkedList();
-    linkedList.add(5);
-    linkedList.add(6);
-    linkedList.add(7);
-    linkedList.remove(6);
-
+    let collection = new HashSet();
+    collection.add(5);
+    collection.add(6);
+    collection.add(5);
 
     b.onclick = function() {
       let container = document.getElementById("visualization-box");
       while (container.firstChild) {
         container.removeChild(container.firstChild);
       }
-      linkedList.visualize(container);
+      collection.visualize(container);
     };
   </script>
 </html>
