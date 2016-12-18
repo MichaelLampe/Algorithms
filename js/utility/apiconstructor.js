@@ -1,16 +1,19 @@
-function addApi(object, name, func, report) {
-  report = report || true;
+let common = require("./common")
 
-  var registered = false;
+function addApi(object, name, func, options) {
+  let defaults = {
+    report: true,
+  }
+  options = common.mergeOptions(options, defaults);
+
   object.prototype[name] = function(args) {
 
     // On first function call, register the stats
-    if (report && !registered) {
+    if (options.report && !this.stats.hasEventRegistered(name)) {
       this.stats.registerEvent(name);
-      registered = true;
     }
 
-    if (report) { this.stats.reportEvent(name);}
+    if (options.report) { this.stats.reportEvent(name);}
 
     func(this, args);
   }

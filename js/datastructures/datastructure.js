@@ -1,9 +1,9 @@
 let Stats = require("../utility/statistics.js");
-let _ = require("underscore");
+let common = require("../utility/common");
 let uuidV4 = require('uuid/v4');
 
 function DataStructure(options, defaults) {
-  this.options = this.mergeOptions(options, defaults);
+  this.options = common.mergeOptions(options, defaults);
   this.options.name = this.options.name || uuidV4();
 
   this.stats = new Stats();
@@ -24,10 +24,5 @@ DataStructure.prototype = {
     }
     container.appendChild(row);
     return row;
-  },
-
-  mergeOptions: function(options, defaults) {
-    options = options || {};
-    return _.extend(defaults, options);
   }
 }

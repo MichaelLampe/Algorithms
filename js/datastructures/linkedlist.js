@@ -1,53 +1,67 @@
-function LinkedList(){
-  this.head = new Node("Head");
+let DataStructure = require("./datastructure.js");
+let ApiConstructor = require("../utility/apiconstructor.js");
+
+function LinkedList(options) {
+  // TODO Add options for tail pointers, if multidirectional.
+  let defaults = {};
+  DataStructure.call(this, options, defaults);
+
+  this.head = new Node("Head", true);
   this.tail = this.head;
-  this.length = 0;
+  this.size = 0;
 }
 
-function Node(data) {
+LinkedList.prototype = Object.create(DataStructure.prototype);
+LinkedList.prototype.constructor = LinkedList;
+
+// Doubly linked nodes
+function Node(data, isHead) {
   this.data = data;
+  this.isHead = isHead || false;
   this.nextElement = null;
   this.previousElement = null;
 }
 
-Node.prototype.hasNext = function(){
-  return this.nextElement != null;
-}
+Node.prototype = {
+  hasNext: function() {
+    return this.nextElement != null;
+  },
+  next: function() {
+    return this.nextElement;
+  },
+  setNext: function(element) {
+    this.nextElement = element;
+  },
 
-Node.prototype.next = function() {
-  return this.nextElement;
-}
-
-Node.prototype.previous = function() {
-  return this.previousElement;
-}
-
-Node.prototype.setNext = function(next) {
-  this.nextElement = next;
-}
-
-Node.prototype.setPrevious = function(previous) {
-  this.previousElement = previous;
+  hasPrevious: function() {
+    return !this.previousElement.isHead;
+  },
+  previous: function() {
+    return this.previousElement;
+  },
+  setPrevious: function(element) {
+    this.previousElement = element;
+  }
 }
 
 module.exports = LinkedList;
 
-LinkedList.prototype.add = function(element) {
+ApiConstructor(LinkedList, "add", function(that, element) {
   let newNode = new Node(element);
 
-  let tail = this.tail;
+  let tail = that.tail;
 
   // Create the two connections
   newNode.setPrevious(tail);
   tail.setNext(newNode);
 
   // Replace previous tail
-  this.tail = newNode;
-  this.length += 1;
-}
+  that.tail = newNode;
+  that.size += 1;
+});
 
-LinkedList.prototype.remove = function(value) {
-  let currentElement = this.head;
+ApiConstructor(LinkedList, "remove", function(that, value) {
+  let currentElement = that.head;
 
   while(currentElement.hasNext && currentElement.data != value) {
     currentElement = currentElement.next();
@@ -65,23 +79,21 @@ LinkedList.prototype.remove = function(value) {
 
   // Only if we actually remove an element do we decrement the length tracker.
   if (currentElement != null) {
-    this.length -= 1;
+    that.size -= 1;
   }
   return currentElement;
-}
+});
 
-LinkedList.prototype.size = function() {
-  return this.length;
-}
+ApiConstructor(LinkedList, "size", function(that) {
+  return that.size;
+})
 
-LinkedList.prototype.visualize = function(container) {
-  row = document.createElement('div');
-  row.className = "linked-list";
-  container.appendChild(row);
+ApiConstructor(LinkedList, "visualize", function(that, container) {
+  container = that.getDataContainer("linked-list", container);
 
   let temp = document.createElement('div');
 
-  let currentNode = this.head;
+  let currentNode = that.head;
   while(currentNode != null) {
     let currentElement = document.createElement('div');
 
@@ -90,8 +102,8 @@ LinkedList.prototype.visualize = function(container) {
     innerText.innerText = String(currentNode.data);
     currentElement.appendChild(innerText);
 
-    row.appendChild(currentElement);
+    container.appendChild(currentElement);
 
     currentNode = currentNode.next();
   }
-};
+}, {report: false});

@@ -1,10 +1,9 @@
 .linked-list {
-  background: purple;
   display: table-row;
 }
 
 .linked-list >:first-child {
-  background: red;
+  background: yellow;
 }
 
 .linked-list > div {

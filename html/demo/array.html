@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Arrays</title>
+    <link rel="stylesheet" type="text/css" href="../../css/array.css" />
+  </head>
+  <body>
+    <h1 style="text-align: center;">Arrays</h1>
+
+    <button id="visualize-button">Visualize</button>
+    <div id="visualization-box" style="width: 100vw; height: 100vh;">
+
+    </div>
+
+  </body>
+
+  <script>
+    let BasicArray = require('../../js/datastructures/array1d.js');
+    let TwoDimensionalArray = require('../../js/datastructures/array2d.js');
+
+    let b = document.getElementById('visualize-button')
+
+    let collection = new TwoDimensionalArray({
+      width: 5,
+      height: 5,
+      init: 5,
+    });
+
+    b.onclick = function() {
+      let container = document.getElementById("visualization-box");
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+      collection.visualize(container);
+      collection.stats.printSummary();
+    };
+  </script>
+</html>

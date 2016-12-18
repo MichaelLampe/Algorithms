@@ -20,13 +20,6 @@ TwoDimensionalArray.prototype.constructor = TwoDimensionalArray;
 
 module.exports = TwoDimensionalArray;
 
-ApiConstructor(TwoDimensionalArray, "initialize", function(that, width, height) {
-  that.data = [];
-  for (let i = 0; i < sizeY; i++) {
-    that.add([]);
-  }
-});
-
 ApiConstructor(TwoDimensionalArray, "remove", function(that, index) {
   var removedElement = that.data.splice(index, 1);
   return removedElement;
@@ -51,6 +44,6 @@ ApiConstructor(TwoDimensionalArray, "size", function(that) {
 ApiConstructor(TwoDimensionalArray, "visualize", function(that, container) {
   let array = that.getDataContainer("array2d", container);
   for (let i = 0; i < that.data.length; i++) {
-    that.data[i].visualize(array, array);
+    that.data[i].visualize(array);
   }
-}, false);
+}, {report: false});

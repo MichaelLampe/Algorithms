@@ -44,4 +44,4 @@ ApiConstructor(BasicArray, "visualize", function(that, container) {
 
     row.appendChild(currentElement);
   }
-}, false);
+}, {report: false});

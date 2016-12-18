@@ -1,32 +1,40 @@
-function HashMap() {
+let DataStructure = require("./datastructure.js");
+let ApiConstructor = require("../utility/apiconstructor.js");
+
+function HashMap(options) {
+  let defaults = {};
+  DataStructure.call(this, options, defaults);
+
   this.data = {};
 }
 
+HashMap.prototype = Object.create(DataStructure.prototype);
+HashMap.prototype.constructor = HashMap;
+
 module.exports = HashMap;
 
-HashMap.prototype.remove = function(key) {
-  this.data.remove(key);
-};
+ApiConstructor(HashMap, "remove", function(that, key) {
+  return that.data.remove(key);
+})
 
-HashMap.prototype.put = function(key, value) {
-  this.data[key] = value;
-};
+ApiConstructor(HashMap, "put", function(that, key, value) {
+  that.data[key] = value;
+})
 
-HashMap.prototype.contains = function(key) {
-  return this.data.contains(key);
-}
+ApiConstructor(HashMap, "contains", function(that, key) {
+  return that.data.contains(key);
+})
 
-HashMap.prototype.get = function(key) {
-  return this.data[index];
-};
+ApiConstructor(HashMap, "get", function(that, key) {
+  return that.data[key];
+})
 
-HashMap.prototype.size = function() {
-  return this.data.size();
-};
+ApiConstructor(HashMap, "size", function(that, size) {
+  return that.data.size();
+})
 
-HashMap.prototype.visualize = function(container) {
-  let thisContainer = document.createElement("div");
-  thisContainer.className = "hashmap";
+ApiConstructor(HashMap, "visualize", function(that, container) {
+  container = that.getDataContainer("hashmap", container);
 
   function createDiv(text){
     let div = document.createElement("div");
@@ -44,11 +52,9 @@ HashMap.prototype.visualize = function(container) {
     return thisEntry;
   }
 
-  thisContainer.appendChild(createEntry("Key", "Value"));
-  for(let key in this.data) {
-    let value = this.data[key];
-    thisContainer.appendChild(createEntry(key, value));
+  container.appendChild(createEntry("Key", "Value"));
+  for(let key in that.data) {
+    let value = that.data[key];
+    container.appendChild(createEntry(key, value));
   }
-
-  container.appendChild(thisContainer);
-}
+}, {report: false});

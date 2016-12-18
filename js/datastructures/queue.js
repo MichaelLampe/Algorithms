@@ -1,30 +1,35 @@
-function Queue(){
+let DataStructure = require("./datastructure.js");
+let ApiConstructor = require("../utility/apiconstructor.js");
+
+function Queue(options) {
+  let defaults = {};
+  DataStructure.call(this, options, defaults);
+
   this.data = [];
 }
 
+Queue.prototype = Object.create(DataStructure.prototype);
+Queue.prototype.constructor = Queue;
+
 module.exports = Queue;
 
-Queue.prototype.push = function(element) {
-  this.data.push(element);
-};
+ApiConstructor(Queue, "push", function(that, element) {
+  that.data.push(element);
+});
 
-Queue.prototype.pop = function() {
-  return this.data.shift();
-};
+ApiConstructor(Queue, "pop", function(that) {
+  return that.data.shift();
+});
 
-Queue.prototype.peek = function() {
-  if (this.data.length == 0) {
+ApiConstructor(Queue, "peek", function(that) {
+  if (that.data.length == 0) {
     return null;
   }
-  return this.data[0];
-};
+  return that.data[0];
+});
 
-Queue.prototype.visualize = function(container) {
-  row = document.createElement('div');
-  row.className = "Queue";
-  container.appendChild(row);
-
-  let temp = document.createElement('div');
+ApiConstructor(Queue, "visualize", function(that, container) {
+  container = that.getDataContainer("queue", container);
 
   for (let i = 0; i < this.data.length; i++) {
     let currentElement = document.createElement('div');
@@ -34,6 +39,6 @@ Queue.prototype.visualize = function(container) {
     innerText.innerText = String(this.data[i]);
     currentElement.appendChild(innerText);
 
-    row.appendChild(currentElement);
+    container.appendChild(currentElement);
   }
-};
+})

@@ -1,36 +1,41 @@
-function Stack(){
+let DataStructure = require("./datastructure.js");
+let ApiConstructor = require("../utility/apiconstructor.js");
+
+function Stack(options) {
+  let defaults = {};
+  DataStructure.call(this, options, defaults);
+
   this.data = [];
 }
 
+Stack.prototype = Object.create(DataStructure.prototype);
+Stack.prototype.constructor = Stack;
+
 module.exports = Stack;
 
-Stack.prototype.push = function(element) {
-  this.data.push(element);
-};
+ApiConstructor(Stack, "push", function(that, element) {
+  that.data.push(element);
+});
 
-Stack.prototype.pop = function() {
-  return this.data.pop();
-};
+ApiConstructor(Stack, "pop", function(that, element) {
+  return that.data.pop();
+});
 
-Stack.prototype.peek = function() {
-  return this.data.peek();
-};
+ApiConstructor(Stack, "peek", function(that) {
+  return that.data.peek();
+});
 
-Stack.prototype.visualize = function(container) {
-  row = document.createElement('div');
-  row.className = "stack";
-  container.appendChild(row);
+ApiConstructor(Stack, "visualize", function(that, container) {
+  container = that.getDataContainer("stack", container);
 
-  let temp = document.createElement('div');
-
-  for (let i = 0; i < this.data.length; i++) {
+  for (let i = 0; i < that.data.length; i++) {
     let currentElement = document.createElement('div');
 
     let innerText = document.createElement('p');
     // TODO allow JSON handling
-    innerText.innerText = String(this.data[i]);
+    innerText.innerText = String(that.data[i]);
     currentElement.appendChild(innerText);
 
-    row.appendChild(currentElement);
+    container.appendChild(currentElement);
   }
-};
+}, {report: false});

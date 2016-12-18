@@ -8,6 +8,10 @@ Statistics.prototype.reportEvent = function(name) {
   this.fields[name] += 1;
 }
 
+Statistics.prototype.hasEventRegistered = function(name) {
+  return name in this.fields;
+}
+
 Statistics.prototype.registerEvents = function(names) {
   let that = this;
   names.forEach(function(element) {

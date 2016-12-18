@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Algorithm Center!</title>
-    <link rel="stylesheet" type="text/css" href="../css/array2d.css" />
+    <link rel="stylesheet" type="text/css" href="../css/array.css" />
+    <link rel="stylesheet" type="text/css" href="../css/hashmap.css" />
+    <link rel="stylesheet" type="text/css" href="../css/hashset.css" />
+    <link rel="stylesheet" type="text/css" href="../css/linked-list.css" />
   </head>
   <body>
     <h1>Algorithm Central</h1>
@@ -26,8 +29,12 @@
 
     let collection = new TwoDimensionalArray({
       width: 5,
-      height: 5
+      height: 5,
+      init: 5,
     });
+    // let collection = new BasicArray({
+    //   width: 5, init: 6
+    // })
 
     b.onclick = function() {
       let container = document.getElementById("visualization-box");
