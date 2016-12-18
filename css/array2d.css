@@ -1,0 +1,33 @@
+.array1d {
+  background: purple;
+  display: table-row;
+}
+
+.array1d >:first-child {
+  background: red;
+}
+
+.array1d > div {
+  background: purple;
+  vertical-align: middle;
+  text-align: center;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px 0px 0px 2px;
+  width: 40px;
+  height: 40px;
+  display: table-cell;
+}
+
+.array1d >:last-child {
+  background: yellow;
+  border-right-width: 2px;
+}
+
+.array2d {
+  display: table-row;
+}
+
+.array2d >:last-child > div {
+  border-bottom-width: 2px;
+}

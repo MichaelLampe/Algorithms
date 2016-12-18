@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Algorithm Center!</title>
+    <link rel="stylesheet" type="text/css" href="../css/linked-list.css" />
+  </head>
+  <body>
+    <h1>Algorithm Central</h1>
+
+    <button id="visualize-button">Visualize</button>
+    <div id="visualization-box" style="width: 100vw; height: 100vh;">
+
+    </div>
+
+  </body>
+
+  <script>
+    let BasicArray = require('../js/datastructures/array1d.js');
+    let TwoDimensionalArray = require('../js/datastructures/array2d.js');
+    let HashMap = require('../js/datastructures/hashmap.js');
+    let LinkedList = require('../js/datastructures/linkedlist.js')
+
+    let b = document.getElementById('visualize-button')
+
+    let linkedList = new LinkedList();
+    linkedList.add(5);
+    linkedList.add(6);
+    linkedList.add(7);
+    linkedList.remove(6);
+
+
+    b.onclick = function() {
+      let container = document.getElementById("visualization-box");
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+      linkedList.visualize(container);
+    };
+  </script>
+</html>

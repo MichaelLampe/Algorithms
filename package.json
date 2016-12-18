@@ -1,0 +1,16 @@
+{
+  "name": "visual-algorithm-factory",
+  "version": "0.0.1",
+  "description": "Algoirthm Testing Factory",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "",
+  "keywords": [],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.4.1"
+  }
+}

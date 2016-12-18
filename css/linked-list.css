@@ -1,0 +1,22 @@
+.linked-list {
+  background: purple;
+  display: table-row;
+}
+
+.linked-list >:first-child {
+  background: red;
+}
+
+.linked-list > div {
+  border-color: black;
+  border-style: solid;
+  border-width: 2px 0 2px 2px;
+  vertical-align: middle;
+  text-align: center;
+  padding: 4px 10px;
+  display: table-cell;
+}
+
+.linked-list >:last-child {
+  border-right-width: 2px;
+}

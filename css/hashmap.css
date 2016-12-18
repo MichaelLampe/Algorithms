@@ -1,0 +1,33 @@
+.hashmap {
+  display: table;
+}
+
+.hashmap > .hash-map-entry {
+  display: table-row;
+  border-color: black;
+  border-style: solid;
+}
+
+.hashmap >:first-child {
+  border-top-width: 2px;
+  background: grey;
+}
+
+.hashmap >:first-child > div {
+  border-top-width: 2px;
+}
+
+.hash-map-entry > div {
+  text-align: center;
+  vertical-align: middle;
+  border-color: black;
+  border-style: solid;
+  border-width: 0 0 2px 2px;
+  width: 100px;
+  height: 20px;
+  display: table-cell;
+}
+
+.hash-map-entry >:last-child {
+  border-right-width: 2px;
+}
