@@ -1,0 +1,60 @@
+html {
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+#header h1 {
+  position: absolute;
+  left: 50px;
+  top: 4vh;
+}
+
+#demos button {
+  color: white;
+  font-size: 2em;
+  float: left;
+  width: 25vw;
+  height: 25vw;
+  background: #34495e;
+  margin: 2vw;
+}
+
+#header {
+  color: white;
+  background: #2c3e50;
+  position: absolute;
+  top: 0;
+  height: 20vh;
+  left: 0;
+  right: 0;
+  border: 1px solid black;
+}
+
+#header button {
+  position: absolute;
+  right: 0;
+  width: 30%;
+  top: 0;
+  bottom: 0;
+  background: #d35400;
+  border: 1px solid black;
+  color: white;
+  font-size: 2em;
+  border-width: 0;
+}
+
+#demos {
+  position: absolute;
+  top: 20vh;
+  right: 6.5vw;
+  left: 6.5vw;
+}
+
+#demos button:hover {
+  transition: all 0.2s;
+  background: #d35400;
+  box-shadow: 0 0 15px white;
+}
+
+body {
+  color: #34495e;
+}

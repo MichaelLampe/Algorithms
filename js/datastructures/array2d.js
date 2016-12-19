@@ -16,6 +16,7 @@ function TwoDimensionalArray(options) {
     let temp = new BasicArray(options);
     this.add(temp);
   }
+  this.addToScene();
   count += 1;
 }
 TwoDimensionalArray.prototype = Object.create(DataStructure.prototype);
@@ -44,7 +45,7 @@ ApiConstructor(TwoDimensionalArray, "size", function() {
   });
 });
 
-ApiConstructor(TwoDimensionalArray, "visualize", function(this, container) {
+ApiConstructor(TwoDimensionalArray, "visualize", function(container) {
   let array = this.getDataContainer("array2d", container);
   for (let i = 0; i < this.data.length; i++) {
     this.data[i].visualize(array);

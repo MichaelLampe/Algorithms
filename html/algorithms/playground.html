@@ -6,11 +6,13 @@
     <link rel="stylesheet" type="text/css" href="../../css/codemirror.css" />
     <link rel="stylesheet" type="text/css" href="../../css/ambiance.css" />
     <link rel="stylesheet" type="text/css" href="../../css/array.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/hashmap.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/linked-list.css" />
     <link rel="stylesheet" type="text/css" href="../../css/algorithm.css" />
   </head>
   <body style="background: black;">
     <nav style="height: 50px; position: absolute; left:0; right:0; top:0; background: purple;">
-      <a href="../index.html"><button>Back</button></a>
+      <a href="../index.html"><button id="backbutton">Back</button></a>
     </nav>
 
     <!-- Code and vis area -->
@@ -43,47 +45,5 @@
     <!-- Right Reference Sheet -->
     <section id="ref"></section>
   </body>
-  <script>
-  let codeMirror = require("CodeMirror");
-
-  // TODO get javascript highlighting working.
-  codeMirror.fromTextArea(document.getElementById("codebox"), {
-    lineNumbers: true,
-    theme: "ambiance",
-    mode:  "javascript"
-  });
-
-    let HashSet = require('../../js/datastructures/hashset.js');
-
-    let collection1 = new HashSet();
-    collection1.add(5);
-    collection1.add(6);
-    collection1.add(1);
-
-    let runButton = document.getElementById("run");
-
-    runButton.onclick = function() {
-      let container = document.getElementById("vis-area");
-      while (container.firstChild) {
-        container.removeChild(container.firstChild);
-      }
-
-      function createEle(collection) {
-        let dataBox = document.createElement('div');
-        dataBox.className = "vis-box"
-        let label = document.createElement('p');
-        label.className = "label";
-        let structure = document.createElement('div');
-        structure.className = "data";
-        label.innerText = collection.options.name;
-        dataBox.appendChild(label);
-        dataBox.appendChild(structure);
-        collection.visualize(structure);
-
-        container.appendChild(dataBox);
-      }
-
-      createEle(collection1);
-  }
-  </script>
+  <script src="../../js/codemirror.js"></script>
 </html>

@@ -9,7 +9,9 @@
     <link rel="stylesheet" type="text/css" href="../../css/algorithm.css" />
   </head>
   <body style="background: black;">
-    <nav style="height: 50px; position: absolute; left:0; right:0; top:0; background: purple;"></nav>
+    <nav style="height: 50px; position: absolute; left:0; right:0; top:0; background: purple;">
+      <a href="../index.html"><button>Back</button></a>
+    </nav>
 
     <!-- Code and vis area -->
     <section style="position: absolute; top: 50px; bottom: 35%; left:0; right: 30vw;">
@@ -42,61 +44,24 @@
     <section id="ref"></section>
   </body>
   <script>
-  let codeMirror = require("CodeMirror");
+    let codeMirror = require("CodeMirror");
 
-  // TODO get javascript highlighting working.
-  codeMirror.fromTextArea(document.getElementById("codebox"), {
-    lineNumbers: true,
-    theme: "ambiance",
-    mode:  "javascript"
-  });
-
+    // TODO get javascript highlighting working.
     let BasicArray = require('../../js/datastructures/array1d.js');
     let TwoDimensionalArray = require('../../js/datastructures/array2d.js');
+    codeMirror.fromTextArea(document.getElementById("codebox"), {
+      value: `
+      let collection = new TwoDimensionalArray({width: 5, height: 5, init: 8});\n
+      collection.add(5);\n
+      collection.add(6);\n
+      collection.remove(0);\n
 
-    let collection1 = new TwoDimensionalArray({
-      width: 5,
-      height: 5,
-      init: 8,
-    });
-    let collection2 = new TwoDimensionalArray({
-      width: 5,
-      height: 5,
-      init: 7,
-    });
-    let collection3 = new TwoDimensionalArray({
-      width: 5,
-      height: 5,
-      init: 6,
+      `
+      lineNumbers: true,
+      theme: "ambiance",
+      mode:  "javascript"
     });
 
     let runButton = document.getElementById("run");
-
-    runButton.onclick = function() {
-    let container = document.getElementById("vis-area");
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
-    }
-
-    function createEle(collection) {
-      let dataBox = document.createElement('div');
-      dataBox.className = "vis-box"
-      let label = document.createElement('p');
-      label.className = "label";
-      let structure = document.createElement('div');
-      structure.className = "data";
-      label.innerText = collection.options.name;
-      dataBox.appendChild(label);
-      dataBox.appendChild(structure);
-      collection.visualize(structure);
-
-      container.appendChild(dataBox);
-    }
-
-    createEle(collection1);
-    createEle(collection2);
-
-    collection.stats.printSummary();
-  }
   </script>
 </html>
