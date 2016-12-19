@@ -1,8 +1,10 @@
 let DataStructure = require("./datastructure.js");
 let ApiConstructor = require("../utility/apiconstructor.js");
 
+let count = 1;
 function TwoDimensionalArray(options) {
   let defaults = {
+    name: "TwoD Array " + String(count),
     "width": 0,
     "height": 0,
     "init": 0,
@@ -14,36 +16,37 @@ function TwoDimensionalArray(options) {
     let temp = new BasicArray(options);
     this.add(temp);
   }
+  count += 1;
 }
 TwoDimensionalArray.prototype = Object.create(DataStructure.prototype);
 TwoDimensionalArray.prototype.constructor = TwoDimensionalArray;
 
 module.exports = TwoDimensionalArray;
 
-ApiConstructor(TwoDimensionalArray, "remove", function(that, index) {
-  var removedElement = that.data.splice(index, 1);
+ApiConstructor(TwoDimensionalArray, "remove", function(index) {
+  var removedElement = this.data.splice(index, 1);
   return removedElement;
 });
 
-ApiConstructor(TwoDimensionalArray, "add", function(that, element) {
-  that.data.push(element);
+ApiConstructor(TwoDimensionalArray, "add", function(element) {
+  this.data.push(element);
 });
 
-ApiConstructor(TwoDimensionalArray, "get", function(that, x, y) {
-  return that.data[y].get(x)
+ApiConstructor(TwoDimensionalArray, "get", function(x, y) {
+  return this.data[y].get(x)
 });
 
-ApiConstructor(TwoDimensionalArray, "size", function(that) {
-  return that.data.map(function(array) {
+ApiConstructor(TwoDimensionalArray, "size", function() {
+  return this.data.map(function(array) {
     return array.length;
   }).reduce(function(a, b) {
     return a + b;
   });
 });
 
-ApiConstructor(TwoDimensionalArray, "visualize", function(that, container) {
-  let array = that.getDataContainer("array2d", container);
-  for (let i = 0; i < that.data.length; i++) {
-    that.data[i].visualize(array);
+ApiConstructor(TwoDimensionalArray, "visualize", function(this, container) {
+  let array = this.getDataContainer("array2d", container);
+  for (let i = 0; i < this.data.length; i++) {
+    this.data[i].visualize(array);
   }
 }, {report: false});

@@ -1,0 +1,162 @@
+/*
+Todo implement zooming somehow for different elements
+*/
+
+body {
+  margin: 0;
+  color: white;
+  font-family: Verdana, Geneva, sans-serif;
+  background: black;
+}
+
+.header {
+  height: 50px;
+  width: 100%;
+}
+
+.databox {
+  background: black;
+  float: left;
+  margin-top: 2px;
+  box-shadow: -2px 0px 5px #161616;
+  width: 34vw;
+  height: 65vh;
+  padding-left: 1vw;
+}
+
+.databox .structure {
+  padding-top: 5%;
+  background: #161616;
+  position: relative;
+  float: right;
+}
+
+.databox .structure > div {
+  margin-left: 30%;
+  margin-top: 80px;
+}
+
+.databox p {
+  margin: 0;
+  height: 10%;
+}
+
+#reference {
+  background: #2980B9;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  width: 30%;
+}
+
+#codebox {
+  background: #2C3E50;
+  position: fixed;
+  bottom: 0;
+}
+
+.CodeMirror {
+  position: absolute;
+  top:0;
+  bottom:-25%;
+  left:0;
+  right:0;
+  height: inherit;
+}
+
+.vis-box {
+  margin:0;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: inline-block;
+  position: relative;
+  background: #B54630;
+  height: 90%;
+  width: 70%;
+  top: 20px;
+  bottom: 10%;
+}
+
+.vis-box .label {
+  margin: 0;
+  text-align: center;
+  position: absolute;
+  top:10px;
+  height: 30px;
+  left:0;
+  right:0;
+}
+
+.vis-box .data {
+  box-shadow: 0 0 2px #FFF;
+  background: #BD4932;
+  position: absolute;
+  top: 40px;
+  left: 5%;
+  bottom: 5%;
+  width: 90%;
+  display: table;
+}
+
+#vis-area {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right: 0;
+  bottom:0;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+#vis-tabs {
+  position: absolute;
+  top:0;
+  height: 35px;
+  left:0;
+  right:0;
+  background: grey
+}
+
+#code-section {
+  position: absolute;
+   top: 65%;
+   bottom: -25%;
+   left:0;
+   right: 0;
+}
+
+.full-area {
+  position: absolute;
+  top: 0;
+  bottom :0;
+  left: 0;
+  right: 0;
+}
+
+#ref {
+  position: absolute; right:0; left: 70vw; bottom:35%; top: 50px; background: blue;
+}
+
+#code-form {
+  position: absolute; top: 35px; left:0; right:0; bottom:0;
+}
+
+#codebox-tabs {
+  position: absolute; top:0; height: 35px; left:0; right:0; background: orange;
+}
+
+#visualization-box {
+  overflow: scroll;
+  background: #3498DB;
+  position: absolute;
+  display: table;
+  top: 0;
+  left: 0;
+}
+
+#codebox-tabs > button {
+  position: relative;
+  height: 100%;
+  width: 10%;
+}

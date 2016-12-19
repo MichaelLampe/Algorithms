@@ -1,8 +1,11 @@
 let DataStructure = require("./datastructure.js");
 let ApiConstructor = require("../utility/apiconstructor.js");
 
+let count = 1;
 function Queue(options) {
-  let defaults = {};
+  let defaults = {
+    "name": "Queue " + String(count),
+  }
   DataStructure.call(this, options, defaults);
 
   this.data = [];
@@ -13,23 +16,23 @@ Queue.prototype.constructor = Queue;
 
 module.exports = Queue;
 
-ApiConstructor(Queue, "push", function(that, element) {
-  that.data.push(element);
+ApiConstructor(Queue, "push", function(element) {
+  this.data.push(element);
 });
 
-ApiConstructor(Queue, "pop", function(that) {
-  return that.data.shift();
+ApiConstructor(Queue, "pop", function() {
+  return this.data.shift();
 });
 
-ApiConstructor(Queue, "peek", function(that) {
-  if (that.data.length == 0) {
+ApiConstructor(Queue, "peek", function() {
+  if (this.data.length == 0) {
     return null;
   }
-  return that.data[0];
+  return this.data[0];
 });
 
-ApiConstructor(Queue, "visualize", function(that, container) {
-  container = that.getDataContainer("queue", container);
+ApiConstructor(Queue, "visualize", function(container) {
+  container = this.getDataContainer("queue", container);
 
   for (let i = 0; i < this.data.length; i++) {
     let currentElement = document.createElement('div');

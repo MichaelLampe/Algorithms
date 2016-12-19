@@ -1,9 +1,12 @@
 let DataStructure = require("./datastructure.js");
 let ApiConstructor = require("../utility/apiconstructor.js");
 
+let count = 1;
 function LinkedList(options) {
+  let defaults = {
+    "name": "Linked List " + String(count),
+  }
   // TODO Add options for tail pointers, if multidirectional.
-  let defaults = {};
   DataStructure.call(this, options, defaults);
 
   this.head = new Node("Head", true);
@@ -46,22 +49,22 @@ Node.prototype = {
 
 module.exports = LinkedList;
 
-ApiConstructor(LinkedList, "add", function(that, element) {
+ApiConstructor(LinkedList, "add", function(element) {
   let newNode = new Node(element);
 
-  let tail = that.tail;
+  let tail = this.tail;
 
   // Create the two connections
   newNode.setPrevious(tail);
   tail.setNext(newNode);
 
   // Replace previous tail
-  that.tail = newNode;
-  that.size += 1;
+  this.tail = newNode;
+  this.size += 1;
 });
 
-ApiConstructor(LinkedList, "remove", function(that, value) {
-  let currentElement = that.head;
+ApiConstructor(LinkedList, "remove", function(value) {
+  let currentElement = this.head;
 
   while(currentElement.hasNext && currentElement.data != value) {
     currentElement = currentElement.next();
@@ -79,21 +82,21 @@ ApiConstructor(LinkedList, "remove", function(that, value) {
 
   // Only if we actually remove an element do we decrement the length tracker.
   if (currentElement != null) {
-    that.size -= 1;
+    this.size -= 1;
   }
   return currentElement;
 });
 
-ApiConstructor(LinkedList, "size", function(that) {
-  return that.size;
+ApiConstructor(LinkedList, "size", function(this) {
+  return this.size;
 })
 
-ApiConstructor(LinkedList, "visualize", function(that, container) {
-  container = that.getDataContainer("linked-list", container);
+ApiConstructor(LinkedList, "visualize", function(container) {
+  container = this.getDataContainer("linked-list", container);
 
   let temp = document.createElement('div');
 
-  let currentNode = that.head;
+  let currentNode = this.head;
   while(currentNode != null) {
     let currentElement = document.createElement('div');
 

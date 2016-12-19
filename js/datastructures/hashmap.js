@@ -1,11 +1,15 @@
 let DataStructure = require("./datastructure.js");
 let ApiConstructor = require("../utility/apiconstructor.js");
+let _HashMap = require("hashmap");
 
+let count = 1;
 function HashMap(options) {
-  let defaults = {};
+  let defaults = {
+    "name": "HashMap " + String(count),
+  }
   DataStructure.call(this, options, defaults);
 
-  this.data = {};
+  this.data = new _HashMap();
 }
 
 HashMap.prototype = Object.create(DataStructure.prototype);
@@ -13,28 +17,28 @@ HashMap.prototype.constructor = HashMap;
 
 module.exports = HashMap;
 
-ApiConstructor(HashMap, "remove", function(that, key) {
-  return that.data.remove(key);
+ApiConstructor(HashMap, "remove", function(key) {
+  return this.data.remove(key);
 })
 
-ApiConstructor(HashMap, "put", function(that, key, value) {
-  that.data[key] = value;
+ApiConstructor(HashMap, "put", function(key, value) {
+  this.data.set(key, value);
 })
 
-ApiConstructor(HashMap, "contains", function(that, key) {
-  return that.data.contains(key);
+ApiConstructor(HashMap, "contains", function(key) {
+  return this.data.has(key);
 })
 
-ApiConstructor(HashMap, "get", function(that, key) {
-  return that.data[key];
+ApiConstructor(HashMap, "get", function(key) {
+  return this.data.get(key);
 })
 
-ApiConstructor(HashMap, "size", function(that, size) {
-  return that.data.size();
+ApiConstructor(HashMap, "size", function() {
+  return this.data.count();
 })
 
-ApiConstructor(HashMap, "visualize", function(that, container) {
-  container = that.getDataContainer("hashmap", container);
+ApiConstructor(HashMap, "visualize", function(container) {
+  container = this.getDataContainer("hashmap", container);
 
   function createDiv(text){
     let div = document.createElement("div");
@@ -53,8 +57,8 @@ ApiConstructor(HashMap, "visualize", function(that, container) {
   }
 
   container.appendChild(createEntry("Key", "Value"));
-  for(let key in that.data) {
-    let value = that.data[key];
+
+  this.data.forEach(function(value, key) {
     container.appendChild(createEntry(key, value));
-  }
+  })
 }, {report: false});

@@ -6,7 +6,7 @@ function addApi(object, name, func, options) {
   }
   options = common.mergeOptions(options, defaults);
 
-  object.prototype[name] = function(args) {
+  object.prototype[name] = function() {
 
     // On first function call, register the stats
     if (options.report && !this.stats.hasEventRegistered(name)) {
@@ -15,7 +15,8 @@ function addApi(object, name, func, options) {
 
     if (options.report) { this.stats.reportEvent(name);}
 
-    func(this, args);
+    let argsArray = Array.prototype.slice.call(arguments);
+    func.apply(this, argsArray);
   }
 }
 
